@@ -45,3 +45,9 @@ awk '/^[0-9]+\.[0-9].*/ {l = $0; getline; printf "%s", l} 1' file.txt
 ```bash
 awk '/^[0-9]+\.[0-9].*/ {$0=$0","} 1' file.txt
 ```
+
+### Get Hub cert
+
+```bash
+echo | openssl s_client -servername $HUB_URL -connect $HUB_URL:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > certificate.crt
+```
