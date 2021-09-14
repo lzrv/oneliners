@@ -51,3 +51,8 @@ awk '/^[0-9]+\.[0-9].*/ {$0=$0","} 1' file.txt
 ```bash
 echo | openssl s_client -servername $HUB_URL -connect $HUB_URL:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > certificate.crt
 ```
+
+### Get the list of .bdio files on the Hub instance
+```bash
+curl "$HUB"'/api/codelocations' -H 'Cookie: AUTHORIZATION_BEARER='"$AUTH_BEARER" | jq | egrep "\"name\"|bdio"
+```
