@@ -56,3 +56,7 @@ echo | openssl s_client -servername $HUB_URL -connect $HUB_URL:443 | sed -ne '/-
 ```bash
 curl "$HUB"'/api/codelocations' -H 'Cookie: AUTHORIZATION_BEARER='"$AUTH_BEARER" | jq | egrep "\"name\"|bdio"
 ```
+### Parse access log to count and sort by number of requests to different endpoints
+```bash
+grep -Po '"GET /api/\w+' hub-webapp/access-log/2020-08-03.log | sort | uniq -c | sort -rn | head
+```
